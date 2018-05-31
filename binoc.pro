@@ -26,8 +26,13 @@ DEFINES += QT_DEPRECATED_WARNINGS
 SOURCES += \
         main.cpp \
         mainwindow.cpp \
-    panel.cpp
+    panel.cpp \
+    wellcome.cpp
 
 HEADERS += \
         mainwindow.h \
-    panel.h
+    panel.h \
+    wellcome.h
+
+RESOURCES += \
+    binoc.qrc

@@ -3,9 +3,11 @@
 
 #include <QWidget>
 #include <QImage>
-#include <QSpinBox>
-#include <QPushButton>
-#include <QLabel>
+
+class QLabel;
+class QPushButton;
+class QSpinBox;
+class QDoubleSpinBox;
 
 class Panel : public QWidget
 {
