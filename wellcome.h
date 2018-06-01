@@ -2,9 +2,9 @@
 #define WELLCOME_H
 
 #include <QWidget>
+#include <QPixmap>
 
-class Wellcome : public QWidget
-{
+class Wellcome : public QWidget {
 	Q_OBJECT
 public:
 	explicit Wellcome(QWidget *parent = nullptr);
@@ -13,7 +13,8 @@ signals:
 	void NewTest();
 	void ShowResults();
 
-public slots:
+private:
+	QPixmap pixmap;
 };
 
-#endif // WELLCOME_H
+#endif  // WELLCOME_H

@@ -2,7 +2,7 @@
 
 #include <QtWidgets>
 #include <QtMath>
-QDialog
+
 Panel::Panel(QWidget *parent) : QWidget(parent), mesh(w, h, QImage::Format_RGB32)
 {
 	int width = 150;
