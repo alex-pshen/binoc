@@ -27,12 +27,18 @@ SOURCES += \
         main.cpp \
         mainwindow.cpp \
     panel.cpp \
-    wellcome.cpp
+    wellcome.cpp \
+    parameters.cpp \
+    testpage.cpp \
+    params.cpp
 
 HEADERS += \
         mainwindow.h \
     panel.h \
-    wellcome.h
+    wellcome.h \
+    parameters.h \
+    testpage.h \
+    params.h
 
 RESOURCES += \
     binoc.qrc

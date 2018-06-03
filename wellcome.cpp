@@ -49,4 +49,8 @@ Wellcome::Wellcome(QWidget *parent)
 	setWindowTitle(tr("Превед!!!"));
 
 	connect(quitPB, SIGNAL(clicked(bool)), QApplication::instance(), SLOT(quit()));
+    connect(newPB, SIGNAL(clicked(bool)), this, SIGNAL(NewTest()));
+    connect(resPB, SIGNAL(clicked(bool)), this, SIGNAL(ShowResults()));
+
+    resPB->setDisabled(true);
 }
