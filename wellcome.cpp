@@ -37,7 +37,7 @@ Wellcome::Wellcome(QWidget *parent)
 	setLayout(vLO);
 	adjustSize();
 	setFixedSize(width(), height());
-	setWindowTitle(tr("Превед!!!"));
+	setWindowTitle(tr("Тестирование бинокулярного зрения"));
 
 	connect(quitPB, SIGNAL(clicked(bool)), QApplication::instance(), SLOT(quit()));
 	connect(newPB, SIGNAL(clicked(bool)), this, SIGNAL(NewTest()));

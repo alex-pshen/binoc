@@ -17,6 +17,7 @@ TestPage::TestPage(QWidget *parent)
     , resultPB(new QPushButton(tr("Результат")))
     , statusBar(new QStatusBar)
 {
+	setWindowTitle(tr("Тестирование бинокулярного зрения"));
 	QHBoxLayout * controlLO = new QHBoxLayout;
 	controlLO->addStretch();
 	controlLO->addWidget(backwardPB);
@@ -55,7 +56,7 @@ void TestPage::Show(const Params &params_)
 {
 	timer.setInterval(params_.dt);
 	params = params_;
-	W1 = params_.w / 100.;
+	W1 = params_.w;
 	Redraw();
 	show();
 }
@@ -64,7 +65,7 @@ void TestPage::Redraw()
 {
 	int I = params.IF;
 	int A = params.A;
-	double W = params.w / 100.;
+	double W = params.w;
 	int bkr = (params.baseColor == Color::RED   ? 1 : 0);
 	int bkg = (params.baseColor == Color::GREEN ? 1 : 0);
 	int bkb = (params.baseColor == Color::BLUE  ? 1 : 0);
@@ -73,7 +74,7 @@ void TestPage::Redraw()
 	int tkb = (params.testColor == Color::BLUE  ? 1 : 0);
 
 	for (int i = 0; i < image_width; ++i) {
-		double x = i * 100. / image_width;
+		double x = (i * 2 * 3.14159) / image_width - 3.14159;
 		int c1 = (I + A * qSin(W * x)) / 2;
 		int c2 = (I + A * qSin(W1 * x)) / 2;
 		c1 = qMin(255,c1);
@@ -105,12 +106,13 @@ void TestPage::Backward()
 
 void TestPage::onTimeout()
 {
-	W1 += dW/100.;
+	W1 += dW;
 	Redraw();
 }
 
 void TestPage::Reset()
 {
-	W1 = params.w / 100.;
+	timer.stop();
+	W1 = params.w;
 	Redraw();
 }

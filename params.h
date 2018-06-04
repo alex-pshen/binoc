@@ -2,17 +2,19 @@
 #define PARAMS_H
 
 enum class Color {
-    RED, GREEN, BLUE
+	RED, GREEN, BLUE
 };
 
 class Params
 {
 public:
-    Params(int IF_, int A_, int w_, int dw_, int dt_, Color baseColor_, Color testColor_);
-    Params &operator = (const Params&);
+	Params(int IF_, int A_, int w_, double dw_, int dt_, Color baseColor_, Color testColor_);
+	Params &operator = (const Params&);
 
-    int IF, A, w, dw, dt;
-    Color baseColor, testColor;
+	int IF, A, w;
+	double dw;
+	int dt;
+	Color baseColor, testColor;
 };
 
 #endif // PARAMS_H

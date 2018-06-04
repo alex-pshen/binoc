@@ -1,6 +1,6 @@
 #include "params.h"
 
-Params::Params(int IF_, int A_, int w_, int dw_, int dt_, Color baseColor_, Color testColor_)
+Params::Params(int IF_, int A_, int w_, double dw_, int dt_, Color baseColor_, Color testColor_)
     : IF(IF_), A(A_), w(w_), dw(dw_), dt(dt_), baseColor(baseColor_), testColor(testColor_)
 {}
 

@@ -25,16 +25,12 @@ DEFINES += QT_DEPRECATED_WARNINGS
 
 SOURCES += \
         main.cpp \
-        mainwindow.cpp \
-    panel.cpp \
     wellcome.cpp \
     parameters.cpp \
     testpage.cpp \
     params.cpp
 
 HEADERS += \
-        mainwindow.h \
-    panel.h \
     wellcome.h \
     parameters.h \
     testpage.h \
