@@ -9,36 +9,38 @@
 
 class QPushButton;
 class QLabel;
+class QStatusBar;
 
 class TestPage : public QWidget
 {
-    Q_OBJECT
-    static constexpr auto image_width{1200}, image_height{600};
+	Q_OBJECT
+	static constexpr auto image_width{1200}, image_height{600};
 public:
-    explicit TestPage(QWidget *parent = nullptr);
+	explicit TestPage(QWidget *parent = nullptr);
 
 signals:
-    void Next();
-    void Prev();
+	void Next();
+	void Prev();
 
 public slots:
-    void Show(const Params& params_);
-    void Redraw();
-    void Forward();
-    void Backward();
-    void onTimeout();
-    void Reset();
+	void Show(const Params& params_);
+	void Redraw();
+	void Forward();
+	void Backward();
+	void onTimeout();
+	void Reset();
 
 private:
-    Params params;
+	Params params;
 
-    QImage mesh;
-    QLabel * meshL;
-    QPushButton *forwardPB, *backwardPB, *pausePB, *stopPB, *savePB, *backPB, *resultPB;
+	QImage mesh;
+	QLabel * meshL;
+	QPushButton *forwardPB, *backwardPB, *pausePB, *stopPB, *savePB, *backPB, *resultPB;
+	QStatusBar * statusBar;
 
-    double W1, dW;
+	double W1, dW;
 
-    QTimer timer;
+	QTimer timer;
 };
 
 #endif // TESTPAGE_H
