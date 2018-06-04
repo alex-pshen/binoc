@@ -4,7 +4,7 @@
 
 Wellcome::Wellcome(QWidget *parent)
     : QWidget(parent)
-    , pixmap(":/wellcome") {
+    , pixmap(":/binocular-vision.jpg") {
 	QLabel * txt = new QLabel("Бинокуля́рное зре́ние (от лат. bini — «два» и лат. oculus — «глаз»)—\n"
 	                         "способность одновременно чётко видеть изображение предмета обоими\n"
 	                         "глазами; в этом случае человек видит одно изображение предмета, на\n"
@@ -12,16 +12,7 @@ Wellcome::Wellcome(QWidget *parent)
 	                         "соединением в зрительном анализаторе (коре головного мозга)\n"
 	                         "изображений, полученных каждым глазом в единый образ. Создаёт\n"
 	                         "объёмность изображения. Бинокулярное зрение также называют\n"
-	                         "стереоскопическим.\n"
-	                         "Если бинокулярное зрение не развивается,\n"
-	                         "возможно зрение только правым или левым глазом. Такое зрение\n"
-	                         "называется монокулярным.\n"
-	                         "Возможно попеременное зрение: то правым,\n"
-	                         "то левым глазом — монокулярное альтернирующее. Иногда встречается\n"
-	                         "зрение двумя глазами, но без слияния в один зрительный образ\n"
-	                         "— одновременное.\n"
-	                         "Отсутствие бинокулярного зрения при двух открытых глазах внешне\n"
-	                         "проявляется в виде постепенно развивающегося косоглазия.");
+	                         "стереоскопическим.\n");
 	QHBoxLayout * txtLO = new QHBoxLayout;
 	txtLO->addStretch();
 	txtLO->addWidget(txt);
@@ -49,8 +40,8 @@ Wellcome::Wellcome(QWidget *parent)
 	setWindowTitle(tr("Превед!!!"));
 
 	connect(quitPB, SIGNAL(clicked(bool)), QApplication::instance(), SLOT(quit()));
-    connect(newPB, SIGNAL(clicked(bool)), this, SIGNAL(NewTest()));
-    connect(resPB, SIGNAL(clicked(bool)), this, SIGNAL(ShowResults()));
+	connect(newPB, SIGNAL(clicked(bool)), this, SIGNAL(NewTest()));
+	connect(resPB, SIGNAL(clicked(bool)), this, SIGNAL(ShowResults()));
 
-    resPB->setDisabled(true);
+	resPB->setDisabled(true);
 }

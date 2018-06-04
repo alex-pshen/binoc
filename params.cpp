@@ -6,11 +6,12 @@ Params::Params(int IF_, int A_, int w_, int dw_, int dt_, Color baseColor_, Colo
 
 Params &Params::operator =(const Params & p)
 {
-    IF = p.IF;
-    A = p.A;
-    w = p.w;
-    dw = p.dw;
-    dt = p.dt;
-    baseColor = p.baseColor;
-    testColor = p.testColor;
+	IF = p.IF;
+	A = p.A;
+	w = p.w;
+	dw = p.dw;
+	dt = p.dt;
+	baseColor = p.baseColor;
+	testColor = p.testColor;
+	return *this;
 }

@@ -1,5 +1,5 @@
 <RCC>
     <qresource prefix="/">
-        <file alias="wellcome">binocular-vision-1068x559.jpg</file>
+        <file>binocular-vision.jpg</file>
     </qresource>
 </RCC>
