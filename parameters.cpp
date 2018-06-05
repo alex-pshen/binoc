@@ -21,24 +21,24 @@ Parameters::Parameters(QWidget *parent)
 {
 	setWindowTitle(tr("Тестирование бинокулярного зрения"));
 	// =============Интенсивность фона===============
-	constexpr auto ifMin = 0, ifMax = 255;
+	constexpr auto ifMin = 0, ifMax = 100;
 	QSlider * ifS = new QSlider(Qt::Horizontal);
 	ifS->setRange(ifMin, ifMax);
 	connect(ifS, SIGNAL(valueChanged(int)), ifSB, SLOT(setValue(int)));
 	connect(ifSB, SIGNAL(valueChanged(int)), ifS, SLOT(setValue(int)));
 	ifSB->setRange(ifMin, ifMax);
 	ifSB->setValue((ifMin + ifMax)/2);
-	QLabel * ifL = new QLabel(tr("Яркость фона:"));
+	QLabel * ifL = new QLabel(tr("Яркость фона, %:"));
 
 	// ============== Амплитуда ===================
-	constexpr auto aMin = 0, aMax = 255;
+	constexpr auto aMin = 0, aMax = 100;
 	QSlider * aS = new QSlider(Qt::Horizontal);
 	aS->setRange(aMin, aMax);
 	connect(aS, SIGNAL(valueChanged(int)), aSB, SLOT(setValue(int)));
 	connect(aSB, SIGNAL(valueChanged(int)), aS, SLOT(setValue(int)));
 	aSB->setRange(aMin, aMax);
 	aSB->setValue((aMin + aMax)/2);
-	QLabel * aL = new QLabel(tr("Амплитуда:"));
+	QLabel * aL = new QLabel(tr("Амплитуда, %:"));
 
 	// ====================== Частота ========================
 	constexpr auto wMin = 1, wMax = 50;
@@ -47,7 +47,7 @@ Parameters::Parameters(QWidget *parent)
 	connect(wS, SIGNAL(valueChanged(int)), wSB, SLOT(setValue(int)));
 	connect(wSB, SIGNAL(valueChanged(int)), wS, SLOT(setValue(int)));
 	wSB->setRange(wMin, wMax);
-	wSB->setValue((wMin + wMax)/2);
+	wSB->setValue(5);
 	QLabel * wL = new QLabel(tr("Базовая частота:"));
 
 	// ==================== Шаг частоты =================
@@ -56,7 +56,7 @@ Parameters::Parameters(QWidget *parent)
 	connect(dwS, SIGNAL(valueChanged(int)), this, SLOT(SetDwSB(int)));
 	connect(dwSB, SIGNAL(valueChanged(double)), this, SLOT(SetDwS(double)));
 	dwSB->setRange(dwMin, dwMax);
-	dwS->setValue((dwMin + dwMax)/2);
+	dwS->setValue(dwMin);
 	QLabel * dwL = new QLabel(tr("Шаг частоты:"));
 
 	// ================== Шаг времени ==================
@@ -67,22 +67,24 @@ Parameters::Parameters(QWidget *parent)
 	connect(dtSB, SIGNAL(valueChanged(int)), dtS, SLOT(setValue(int)));
 	dtSB->setRange(dtMin, dtMax);
 	dtSB->setValue(1000);
-	QLabel * dtL = new QLabel(tr("Шаг времени:"));
+	QLabel * dtL = new QLabel(tr("Шаг времени, мс:"));
 
 	// =============== Цвета ============================
 	baseColorCB->addItems({"Красный", "Зеленый", "Синий"});
 	testColorCB->addItems({"Красный", "Зеленый", "Синий"});
+	testColorCB->setCurrentIndex(2);
 	QHBoxLayout * colorLO = new QHBoxLayout;
 	colorLO->addWidget(baseColorCB);
 	colorLO->addStretch();
 	colorLO->addWidget(new QLabel(tr("Исходный глаз:")));
 	colorLO->addWidget(leftRB);
 	colorLO->addWidget(rightRB);
+	leftRB->setChecked(true);
 	colorLO->addStretch();
 	colorLO->addWidget(testColorCB);
 
 	QHBoxLayout * buttonsLO = new QHBoxLayout;
-	buttonsLO->addWidget(prevPB);
+//	buttonsLO->addWidget(prevPB);
 	buttonsLO->addStretch();
 	buttonsLO->addWidget(nextPB);
 
@@ -125,8 +127,8 @@ Parameters::Parameters(QWidget *parent)
 
 void Parameters::Redraw()
 {
-	int I = ifSB->value();
-	int A = aSB->value();
+	int I = ifSB->value() * 255. /100.;
+	int A = aSB->value() * 255. / 100.;
 	double W = wSB->value();
 	int kr = (baseColorCB->currentIndex() == 0 ? 1 : 0) | (testColorCB->currentIndex() == 0 ? 1 : 0);
 	int kg = (baseColorCB->currentIndex() == 1 ? 1 : 0) | (testColorCB->currentIndex() == 1 ? 1 : 0);
@@ -171,7 +173,10 @@ void Parameters::onFinish()
 		break;
 	}
 
-	Params params(ifSB->value(), aSB->value(), wSB->value(), dwSB->value(), dtSB->value(), baseColor, testColor);
+	QString baseEye = (leftRB->isChecked() ? tr("левый") : tr("правый"));
+
+	Params params(ifSB->value(), aSB->value(), wSB->value(), dwSB->value(), dtSB->value(),
+	              baseColor, testColor, baseEye);
 	emit Finish(params);
 }
 

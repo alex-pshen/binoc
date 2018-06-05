@@ -5,7 +5,7 @@
 
 TestPage::TestPage(QWidget *parent)
     : QWidget(parent)
-    , params(0,0,0,0,0, Color::RED, Color::BLUE)
+    , params(0,0,0,0,0, Color::RED, Color::BLUE, QString())
     , mesh(image_width, image_height, QImage::Format_RGB32)
     , meshL(new QLabel)
     , forwardPB(new QPushButton(tr("Увеличение частоты")))
@@ -47,24 +47,27 @@ TestPage::TestPage(QWidget *parent)
 	connect(forwardPB, SIGNAL(clicked(bool)), this, SLOT(Forward()));
 	connect(pausePB, SIGNAL(clicked(bool)), &timer, SLOT(stop()));
 	connect(stopPB, SIGNAL(clicked(bool)), this, SLOT(Reset()));
+	connect(savePB, SIGNAL(clicked(bool)), this, SLOT(Save()));
+	connect(resultPB, SIGNAL(clicked(bool)), this, SLOT(Result()));
+	connect(resultPB, SIGNAL(clicked(bool)), this, SLOT(hide()));
 
-	savePB->setDisabled(true);
-	resultPB->setDisabled(true);
+//	savePB->setDisabled(true);
+//	resultPB->setDisabled(true);
 }
 
 void TestPage::Show(const Params &params_)
 {
 	timer.setInterval(params_.dt);
 	params = params_;
-	W1 = params_.w;
+	W1 = params.w;
 	Redraw();
 	show();
 }
 
 void TestPage::Redraw()
 {
-	int I = params.IF;
-	int A = params.A;
+	int I = params.IF * 255. / 100.;
+	int A = params.A * 255. / 100.;
 	double W = params.w;
 	int bkr = (params.baseColor == Color::RED   ? 1 : 0);
 	int bkg = (params.baseColor == Color::GREEN ? 1 : 0);
@@ -88,8 +91,9 @@ void TestPage::Redraw()
 			mesh.setPixel(i,j, qRgb(cr, cg, cb));
 	}
 	meshL->setPixmap(QPixmap::fromImage(mesh));
-	statusBar->showMessage(QString(tr("Базовая частота: %1. Тестовая частота: %2.")
-	                               .arg(W).arg(W1)));
+	statusBar->showMessage(QString(tr("Базовая частота: %1. Тестовая частота: %2. "
+	                                  "Верхняя частота: %3. Нижняя частота: %4")
+	                               .arg(W).arg(W1).arg(params.maxW).arg(params.minW)));
 }
 
 void TestPage::Forward()
@@ -115,4 +119,18 @@ void TestPage::Reset()
 	timer.stop();
 	W1 = params.w;
 	Redraw();
+}
+
+void TestPage::Save()
+{
+	if (W1 > params.w)
+		params.maxW = W1;
+	if (W1 < params.w)
+		params.minW = W1;
+	Redraw();
+}
+
+void TestPage::Result()
+{
+	emit Next(params);
 }

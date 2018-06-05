@@ -19,7 +19,7 @@ public:
 	explicit TestPage(QWidget *parent = nullptr);
 
 signals:
-	void Next();
+	void Next(const Params& params_);
 	void Prev();
 
 public slots:
@@ -29,6 +29,8 @@ public slots:
 	void Backward();
 	void onTimeout();
 	void Reset();
+	void Save();
+	void Result();
 
 private:
 	Params params;

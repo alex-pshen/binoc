@@ -28,13 +28,15 @@ SOURCES += \
     wellcome.cpp \
     parameters.cpp \
     testpage.cpp \
-    params.cpp
+    params.cpp \
+    result.cpp
 
 HEADERS += \
     wellcome.h \
     parameters.h \
     testpage.h \
-    params.h
+    params.h \
+    result.h
 
 RESOURCES += \
     binoc.qrc

@@ -4,15 +4,14 @@
 
 Wellcome::Wellcome(QWidget *parent)
     : QWidget(parent)
-    , pixmap(":/binocular-vision.jpg") {
-	QLabel * txt = new QLabel("Бинокуля́рное зре́ние (от лат. bini — «два» и лат. oculus — «глаз»)—\n"
-	                         "способность одновременно чётко видеть изображение предмета обоими\n"
-	                         "глазами; в этом случае человек видит одно изображение предмета, на\n"
-	                         "который смотрит, то есть это зрение двумя глазами,с подсознательным\n"
-	                         "соединением в зрительном анализаторе (коре головного мозга)\n"
-	                         "изображений, полученных каждым глазом в единый образ. Создаёт\n"
-	                         "объёмность изображения. Бинокулярное зрение также называют\n"
-	                         "стереоскопическим.\n");
+    , pixmap(":/bolshie-golubye-glaza-rebenka.jpg") {
+	QLabel * txt = new QLabel(
+	               "Уважаемый, пользователь!\n"
+	               "Приветствуем Вас, в программном комплексе бинокулярного восприятия.\n"
+	               "Программа позволит вам проверить ваше бинокулярное зрение, способность\n"
+	               "зрительного анализатора к восприятию глубинной протяженности и\n"
+	               " удаленности объектов наблюдения.\n"
+	               "Желаем, Вам, легкого тестирования, хороших результатов и крепкого здоровья.");
 	QHBoxLayout * txtLO = new QHBoxLayout;
 	txtLO->addStretch();
 	txtLO->addWidget(txt);
@@ -25,12 +24,19 @@ Wellcome::Wellcome(QWidget *parent)
 	QPushButton * quitPB = new QPushButton(tr("Выход"));
 
 	QHBoxLayout * hLO = new QHBoxLayout;
+
 	hLO->addWidget(newPB);
-	hLO->addWidget(resPB);
+//	hLO->addWidget(resPB);
+//	hLO->addStretch();
 	hLO->addWidget(quitPB);
 
 	QVBoxLayout * vLO = new QVBoxLayout;
+	QHBoxLayout * picLO = new QHBoxLayout;
+	picLO->addStretch();
+	picLO->addWidget(pic, Qt::AlignCenter);
+	picLO->addStretch();
 	vLO->addWidget(pic, Qt::AlignCenter);
+//	vLO->addLayout(picLO);
 	vLO->addLayout(txtLO);
 	vLO->addLayout(hLO);
 
