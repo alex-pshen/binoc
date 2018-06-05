@@ -6,6 +6,7 @@ Result::Result(QWidget *parent)
     : QWidget(parent)
     , txt(new QLabel)
 {
+	setWindowTitle(tr("Результат"));
 	QPushButton * backPB = new QPushButton(tr("Назад"));
 	QPushButton * quitPB = new QPushButton(tr("Выход"));
 	connect(backPB, SIGNAL(clicked(bool)), this, SIGNAL(Prev()));
